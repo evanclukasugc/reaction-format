@@ -1,0 +1,8 @@
+jobs/
+*_work/
+__pycache__/
+*.mp4
+*.mov
+*.MOV
+*.MP4
+*.mkv

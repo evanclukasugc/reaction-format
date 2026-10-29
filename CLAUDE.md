@@ -69,6 +69,13 @@ Edit, in order:
   Facebook = post_type video + details {type: reel} (feed is Instagram-only).
   Video imports take a few minutes. Submit with wait_for_completion false and check with get_recent_posts;
   never resubmit after a timeout (the first post timed out but had gone through).
+  **Evan's preference (2026-10-29): post each video as ONE post to both accounts** (`accounts: [instagram id,
+  facebook id]`, post_type video, details type reel). Don't split per network. On the first combined batch,
+  confirm both networks published as Reels and note the result here.
+  Batches: one submit call with all posts works, but it always times out at 60s while Publer keeps importing
+  (~10 min for 19 x 55 MB). Check with list_publer_posts state scheduled. Publer runs one "download from URL"
+  job at a time, so a second submit during an import is rejected (no duplicate is created). The posts listing
+  repeats rows across pages, so count unique post ids. get_recent_posts doesn't show future-dated posts.
 
 If `setup.sh` hasn't run in this session (e.g. `import faster_whisper` fails), run `bash setup.sh` first.
 

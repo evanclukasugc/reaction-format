@@ -86,7 +86,7 @@ python3 scripts/make_clipping_reaction.py --outfits <outfit dirs...> --reactions
 ```
 Outputs `<reaction>__<outfit>.mp4`. Speed comes from sharing work: cutouts once per outfit, intro+demo
 rendered once per outfit, then each video renders only hook+reaction (~20s each) and is joined without
-re-encoding. First full batch: 20 videos.
+re-encoding. First full batch: 20 videos in 15m40s (4 outfits prepared in ~9 min, then ~15-35s per video).
 
 **No wall clean-up (`refine_matte.py`) on these clips.** They were filmed against a warm beige wall close to
 skin tone. The fixed "grey wall" rule would eat the gray shirt, and an adaptive colour version punched holes

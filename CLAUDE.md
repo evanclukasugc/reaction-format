@@ -4,8 +4,8 @@ This repo automates Evan's "reaction" short-form video edit, which used to be do
 When Evan asks for a reaction video, or a "reaction format" video, follow this file. Evan isn't a
 programmer: keep explanations plain, don't make them run commands, and send the finished video back.
 
-Evan plans to add other formats later. Give each new format its own section or file, and keep this
-one unchanged unless Evan changes it.
+Formats so far: **reaction** (below) and **clipping reaction** (its own section further down). Evan plans
+to add more. Give each new format its own section, and keep existing ones unchanged unless Evan changes them.
 
 ## The format (decided with Evan; don't change without asking)
 
@@ -57,6 +57,40 @@ Edit, in order:
    The Drive connector can't upload a file this size, so don't promise a Drive upload.
 
 If `setup.sh` hasn't run in this session (e.g. `import faster_whisper` fails), run `bash setup.sh` first.
+
+## Clipping reaction format (second format; decided with Evan 2026-10-29)
+
+Batch format: **every reaction video x every outfit** (e.g. 5 reactions x 4 outfits = 20 videos).
+
+Drive layout inside "Claude Videos":
+- One folder per outfit ("gray shirt no hat", "gray shirt hat", "Black shirt no hat", "Black shirt hat"). Each has
+  3 clips with meaningless names (`copy_<uuid>.MOV`), so they're told apart by length: **shortest = hook**
+  ("Watch this", ~1.1s), **middle = intro** ("Let me show you how easy it is to start clipping... comment the
+  word clip", ~4.4s), **longest = pen twirl** (~28-32s).
+- "CLIPPING react videos": the reaction videos (streamer clips, 10-27s, various resolutions, no CTA of their own).
+- `streamer demo .mp4` in the top folder: a screen-recorded tutorial with its own captions, ending on
+  "COMMENT 'CLIP' FOR A FREE GUIDE!".
+
+Each video, in order:
+1. Hook (background removed, 69%, bottom-left) over a freeze of the reaction video's first frame for the hook's length.
+2. The reaction video **in full** (nothing cut), with the pen twirl (background removed, muted, bottom-right,
+   same size/position as the reaction format).
+3. The intro clip **untouched**; Evan already trimmed it.
+4. The streamer demo **untouched** (only conformed to 1080x1920/30fps; it's 60fps).
+No text overlays (the demo already carries the CTA). Same export as the reaction format.
+
+Run:
+```
+python3 scripts/make_clipping_reaction.py --outfits <outfit dirs...> --reactions <react dir> \
+    --demo <streamer demo> --out jobs/<name>/out
+```
+Outputs `<reaction>__<outfit>.mp4`. Speed comes from sharing work: cutouts once per outfit, intro+demo
+rendered once per outfit, then each video renders only hook+reaction (~20s each) and is joined without
+re-encoding. First full batch: 20 videos.
+
+**No wall clean-up (`refine_matte.py`) on these clips.** They were filmed against a warm beige wall close to
+skin tone. The fixed "grey wall" rule would eat the gray shirt, and an adaptive colour version punched holes
+in Evan's face. Plain RVM with frame-exact pairing looked clean.
 
 ## Environment requirements
 

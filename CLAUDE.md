@@ -56,6 +56,16 @@ Edit, in order:
    reappears. Then send the MP4 with the SendUserFile tool and tell Evan the cut point, keyword and CTA trim.
    The Drive connector can't upload a file this size, so don't promise a Drive upload.
 
+**Getting finished videos out (learned 2026-10-29):** the finished videos exist only on the cloud machine.
+- The Drive connector only takes inline base64, so it can't upload videos. It *can* create folders
+  (e.g. a "batch <date>" folder inside Claude Videos) for Evan to drag files into.
+- SendUserFile caps each file at 500 MB. For a batch, send one zip per outfit (ZIP_STORED, ~270 MB each)
+  rather than one big zip.
+- Publer (MCP) needs a public URL for media. Evan uploads the video to Drive as "Anyone with the link",
+  then pass `https://drive.usercontent.google.com/download?id=<id>&export=download&confirm=t`.
+  Only an Instagram account (Evan Lukas) is connected in Publer's "viewmax" workspace; there's no Facebook
+  account yet. Evan wants a "regular main feed reel": Instagram video with details type reel + feed true.
+
 If `setup.sh` hasn't run in this session (e.g. `import faster_whisper` fails), run `bash setup.sh` first.
 
 ## Clipping reaction format (second format; decided with Evan 2026-10-29)

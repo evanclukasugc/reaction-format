@@ -63,8 +63,12 @@ Edit, in order:
   rather than one big zip.
 - Publer (MCP) needs a public URL for media. Evan uploads the video to Drive as "Anyone with the link",
   then pass `https://drive.usercontent.google.com/download?id=<id>&export=download&confirm=t`.
-  Only an Instagram account (Evan Lukas) is connected in Publer's "viewmax" workspace; there's no Facebook
-  account yet. Evan wants a "regular main feed reel": Instagram video with details type reel + feed true.
+  Publer "viewmax" workspace accounts: Instagram "Evan Lukas" and Facebook Page "evanlukasmp44" (added
+  2026-10-29; Publer posts to Instagram do NOT auto-share to Facebook, so post to both explicitly).
+  Evan wants a "regular main feed reel": Instagram = post_type video + details {type: reel, feed: true};
+  Facebook = post_type video + details {type: reel} (feed is Instagram-only).
+  Video imports take a few minutes. Submit with wait_for_completion false and check with get_recent_posts;
+  never resubmit after a timeout (the first post timed out but had gone through).
 
 If `setup.sh` hasn't run in this session (e.g. `import faster_whisper` fails), run `bash setup.sh` first.
 

@@ -8,7 +8,7 @@
    "n": 1,
    "video": "spend_money_blur__grey_nohat__watchthis.mp4",
    "drive_id": "1HtWo3jdmocK68pfFiCZqEsvWU6S_oca-",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 12:00 AM"
   },
@@ -16,7 +16,7 @@
    "n": 2,
    "video": "millionaire_vs_haters__blue_hat__cantbelieve.mp4",
    "drive_id": "10vFArTzJEOuJfFSAefQAn2yAJb6a6EEP",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 2:00 AM"
   },
@@ -24,7 +24,7 @@
    "n": 3,
    "video": "spend_money_1word__grey_hat__watchthis.mp4",
    "drive_id": "1Uk3hNU80GfNuTwL_1xjvL-dxWlKE5zcd",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 4:00 AM"
   },
@@ -32,7 +32,7 @@
    "n": 4,
    "video": "millionaire_vs_haters_flipped__blue_nohat__cantbelieve.mp4",
    "drive_id": "1_aB4KQmtjzPHBKd3GsApHAfO82EF4pCM",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 6:00 AM"
   },
@@ -40,7 +40,7 @@
    "n": 5,
    "video": "spend_money_blur__blue_hat__watchthis.mp4",
    "drive_id": "1ebGP3gW5ZfB7VEafAJje4egw29bgLiMY",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 8:00 AM"
   },
@@ -48,7 +48,7 @@
    "n": 6,
    "video": "millionaire_vs_haters__grey_hat__cantbelieve.mp4",
    "drive_id": "1Ly3uIU73fyZo3Q8ycFcpMjpd-a8s6wuX",
-   "status": "submitted to Publer, awaiting confirmation",
+   "status": "scheduled (Publer confirmed)",
    "network": "Instagram only (main feed reel)",
    "time_pacific": "2026-10-30 10:00 AM"
   },
@@ -208,5 +208,6 @@
    "drive_id": "1tTeH0BcrC0ukNPW7cT9-UqiewH-CM1Q3",
    "status": "not scheduled"
   }
- ]
+ ],
+ "summary": "Posts 1-6 scheduled on Instagram only, every 2h 12-10 AM PT Oct 30. Posts 7-32 not scheduled yet: continue from post 7 in this order."
 }

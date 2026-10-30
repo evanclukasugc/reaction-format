@@ -153,6 +153,9 @@ Matching rules Evan gave:
   only a short black beat after it (ref 1: 0.93s, ref 2: 0.70s; `black_beat` in the spec), and stop the
   text hook and pen twirl at the snap (the reference's black beat is fully black), then the intro.
 
+**Posting record:** `assets/batch_1029/posting_plan.json` holds the posting order for all 32 videos (Drive ids in
+"batch 10/29 upload") and which ones are scheduled. When Evan says "schedule the rest", continue from the first
+post not marked scheduled, and update the file after Publer confirms.
 First batch: 32 videos in 20 min (4 outfits prepared in ~8 min, then ~22s per video).
 Run: `python3 scripts/make_ref_reaction.py jobs/b1029/spec.json` (the spec lists outfits, refs and reaction
 to reference mapping). `scripts/make_text_hook.py` renders text hooks; faces use OpenCV's Haar cascade

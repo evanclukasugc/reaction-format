@@ -79,8 +79,11 @@ Edit, in order:
   **Evan's preference (2026-10-29): post each video as ONE post to both accounts** (`accounts: [instagram id,
   facebook id]`, post_type video, details type reel). Don't split per network. On the first combined batch,
   confirm both networks published as Reels and note the result here.
-  Batches: one submit call with all posts works, but it always times out at 60s while Publer keeps importing
-  (~10 min for 19 x 55 MB). Check with list_publer_posts state scheduled. Publer runs one "download from URL"
+  Batches: submit **at most ~9 videos per call**. A 19-video call worked (~10 min import), but a 26-video call
+  (~1.3 GB) was silently dropped: no posts were created. Groups of 9 import in ~4 min. Every call times out at
+  60s while Publer keeps importing. Before resubmitting a group that didn't show up, check that Publer isn't
+  still importing: a media-only `upload_publer_media_from_url` is rejected with "wait until your other download
+  ... jobs have finished" while an import runs, and it creates no post (its media_id can be reused). Check with list_publer_posts state scheduled. Publer runs one "download from URL"
   job at a time, so a second submit during an import is rejected (no duplicate is created). The posts listing
   repeats rows across pages, so count unique post ids. get_recent_posts doesn't show future-dated posts.
 

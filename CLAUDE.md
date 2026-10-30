@@ -4,6 +4,12 @@ This repo automates Evan's "reaction" short-form video edit, which used to be do
 When Evan asks for a reaction video, or a "reaction format" video, follow this file. Evan isn't a
 programmer: keep explanations plain, don't make them run commands, and send the finished video back.
 
+**Text rule (Evan, 2026-10-30): ALL text Evan asks for (text hooks, captions, CTA text, titles, any new
+format) is automatically CapCut Classic: `fonts/TikTokDisplay-Medium.ttf`, white fill, black outline (~5.5% of
+the font size; 5px at ~89px), no bold, no shadow.** Don't ask which font; only use something else if Evan
+names a different one. Renderers: `scripts/make_text_hook.py --font fonts/TikTokDisplay-Medium.ttf --stroke N`
+(single line + emojis) and `scripts/make_text.py` (centred multi-line CTA; already defaults to it).
+
 Formats so far: **reaction** (below), **clipping reaction** and **referenced clipping reaction** (own sections further down). Evan plans
 to add more. Give each new format its own section, and keep existing ones unchanged unless Evan changes them.
 
@@ -31,9 +37,10 @@ Edit, in order:
    **start exactly when Evan starts talking** and end right after he stops (Evan approved the end at
    last word + 0.3s). The start is measured from the audio level, because Whisper's word times run early.
 5. **CTA text.** Evan says a keyword ("studio", "Claude", "creator", ...). Over the whole CTA, put
-   `Comment "<Keyword>"` / `for the full guide` (two lines, keyword capitalised), in **TikTok Sans**
-   (= CapCut's "Classic"/TikTok classic font), weight ~550, white with a ~7px black outline, centred,
-   centre at y≈375 (above his head), first line ~800px wide.
+   `Comment "<Keyword>"` / `for the full guide` (two lines, keyword capitalised), in **CapCut Classic**
+   (TikTok Display Medium, white, black outline ~5.5% of font size, no bold; see the text rule above), centred,
+   centre at y≈375 (above his head), first line ~800px wide. (Videos made before 2026-10-30 used TikTok Sans;
+   Evan chose not to redo them.)
 6. Export **1080x1920, 30fps, H.264 MP4**.
 
 ## How to make one
@@ -169,8 +176,8 @@ solid evenly lit green, stand a step in front, never wear green, mainly worth it
   `--font fonts/TikTokDisplay-Medium.ttf --stroke 5` at ~89px (CapCut's 0.08 isn't the same unit: 7px looked
   thicker than the reference, 5px matched). Don't add `--embolden`.
 - `fonts/TikTokSans.ttf`: free variable TikTok Sans (Google Fonts). Same family look, but not identical. The
-  original reaction format's CTA text ("Comment "Studio" for the full guide") keeps using it. Evan decided on
-  2026-10-30 not to switch that format to TikTok Display.
+  no longer used for new videos. CapCut Classic is the default for everything (text rule at the top). Older
+  reaction-format videos were made with it and are not being redone.
 - Getting fonts off Evan's Mac: this cloud session can't see his Mac. A local Claude session (desktop app,
   "on your Mac") can find the file, and Evan can upload it straight into this chat.
 

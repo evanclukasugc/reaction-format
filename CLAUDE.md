@@ -134,8 +134,8 @@ Matching rules Evan gave:
   bigger than the reference face, which Evan's reference framing implies.
 - **Text hook** on BOTH hook types, for the hook and the whole reaction: the reference text exactly
   ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). Font: **TikTok Display Medium**
-  (`fonts/TikTokDisplay-Medium.ttf`, the real font from Evan's CapCut, = CapCut "Classic") with a 1px faux bold
-  (`--embolden 1`) and a 3px black outline, box 84,478 to 802,554. This matches the reference exactly. Earlier
+  (`fonts/TikTokDisplay-Medium.ttf`, the real font from Evan's CapCut, = CapCut "Classic"): white fill, black
+  outline `--stroke 5`, **no bold**, box 84,478 to 802,554. Earlier
   TikTok Sans approximations (700/100, then 650/90 condensed) were close but Evan could tell. The emojis are the real Apple ones lifted from the reference
   (`assets/batch_1029/emoji_*_1080.png`; text PNGs and spec.json saved there too, extracted as pixels that stay static while the video changes, then
   cleaned by colour).
@@ -159,8 +159,10 @@ solid evenly lit green, stand a step in front, never wear green, mainly worth it
 ## Fonts
 
 - `fonts/TikTokDisplay-Medium.ttf`: **CapCut's "Classic" / TikTok font**, pulled from Evan's CapCut desktop install
-  (2026-10-30). Use it for TikTok-style text (`make_text_hook.py --font fonts/TikTokDisplay-Medium.ttf --embolden 1`).
-  Only Medium exists in the file; CapCut text looks one step bolder, so add the 1px embolden.
+  (2026-10-30). CapCut's own "Classic" preset (read from Evan's draft by a local session): this font, fill
+  #ffffff, outline #000000 at CapCut width 0.08, no shadow, no bold/italic. In `make_text_hook.py` that's
+  `--font fonts/TikTokDisplay-Medium.ttf --stroke 5` at ~89px (CapCut's 0.08 isn't the same unit: 7px looked
+  thicker than the reference, 5px matched). Don't add `--embolden`.
 - `fonts/TikTokSans.ttf`: free variable TikTok Sans (Google Fonts). Same family look, but not identical. The
   original reaction format's CTA text still uses it (approved by Evan before the real font was available);
   ask before switching that one.

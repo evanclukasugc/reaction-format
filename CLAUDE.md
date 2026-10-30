@@ -140,6 +140,7 @@ Matching rules Evan gave:
 - **Pen twirl:** placed by face match (ref 1 face 131px at 235,1445; ref 2 face 140px at 828,1462).
 - The green flash at the end of the reaction clips is part of the source edit, and the reference keeps it.
 
+First batch: 32 videos in 20 min (4 outfits prepared in ~8 min, then ~22s per video).
 Run: `python3 scripts/make_ref_reaction.py jobs/b1029/spec.json` (the spec lists outfits, refs and reaction
 to reference mapping). `scripts/make_text_hook.py` renders text hooks; faces use OpenCV's Haar cascade
 (`~/.cache/reaction-format/models/haarcascade_frontalface_default.xml`, fetched from GitHub; OpenCV 5 doesn't

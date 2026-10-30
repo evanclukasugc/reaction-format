@@ -4,7 +4,7 @@ This repo automates Evan's "reaction" short-form video edit, which used to be do
 When Evan asks for a reaction video, or a "reaction format" video, follow this file. Evan isn't a
 programmer: keep explanations plain, don't make them run commands, and send the finished video back.
 
-Formats so far: **reaction** (below) and **clipping reaction** (its own section further down). Evan plans
+Formats so far: **reaction** (below), **clipping reaction** and **referenced clipping reaction** (own sections further down). Evan plans
 to add more. Give each new format its own section, and keep existing ones unchanged unless Evan changes them.
 
 ## The format (decided with Evan; don't change without asking)
@@ -112,6 +112,42 @@ re-encoding. First full batch: 20 videos in 15m40s (4 outfits prepared in ~9 min
 **No wall clean-up (`refine_matte.py`) on these clips.** They were filmed against a warm beige wall close to
 skin tone. The fixed "grey wall" rule would eat the gray shirt, and an adaptive colour version punched holes
 in Evan's face. Plain RVM with frame-exact pairing looked clean.
+
+## Referenced clipping reaction (third format; batch 10/29, decided with Evan 2026-10-29)
+
+Like the clipping reaction, but Evan supplies **reference videos** (another creator's edits of the same
+reaction clips) and everything is matched to them: hook size/position, pen-twirl size/position, and a text hook.
+Batch = every outfit x every hook x every reaction (batch 10/29: 4 x 2 x 4 = 32).
+
+Drive layout ("Batch 10/29" in Claude Videos): one folder per outfit with **named** hooks (`watch this`,
+`can't believe`), an intro (`copy_*`, ~4s) and the pen twirl (`copy_*`, ~30s, the longest). There's also a
+"react to these videos" folder, `streamer demo .mp4`, and the references in the batch folder:
+`cantbelieve+texthookreference1/2.MP4` and `watchthishookreferencesize.MP4`.
+
+Matching rules Evan gave:
+- **Each reaction video matches its own reference** (the references show the same reaction clips; reference 1 =
+  "spend your money" Impaulsive clip, reference 2 = "millionaire clipper vs haters"). The text hook, pen side
+  and "can't believe" hook position all follow that reference. The pen moves sides per video.
+- **"Can't believe" hook:** Evan's face matched to the face in the reference (size and centre), flush bottom.
+- **"Watch this" hook:** size from `watchthishookreferencesize` (face ~641px, centre 385,1172), but kept at
+  least full width (`cover_width`) so the clip's side edges never cut through the shirt. That comes out ~10%
+  bigger than the reference face, which Evan's reference framing implies.
+- **Text hook** on BOTH hook types, for the hook and the whole reaction: the reference text exactly
+  ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). TikTok Sans weight 700,
+  4px black outline, box 84,478 to 802,554. The emojis are the real Apple ones lifted from the reference
+  (`assets/batch_1029/emoji_*_1080.png`; text PNGs and spec.json saved there too, extracted as pixels that stay static while the video changes, then
+  cleaned by colour).
+- **Pen twirl:** placed by face match (ref 1 face 131px at 235,1445; ref 2 face 140px at 828,1462).
+- The green flash at the end of the reaction clips is part of the source edit, and the reference keeps it.
+
+Run: `python3 scripts/make_ref_reaction.py jobs/b1029/spec.json` (the spec lists outfits, refs and reaction
+to reference mapping). `scripts/make_text_hook.py` renders text hooks; faces use OpenCV's Haar cascade
+(`~/.cache/reaction-format/models/haarcascade_frontalface_default.xml`, fetched from GitHub; OpenCV 5 doesn't
+ship it). Test on one outfit first and compare frames side by side with the references.
+
+**Green screen:** Evan filmed the blue-shirt hooks on a (checkered) green backdrop. RVM handles it fine, and
+`despill=type=green` is applied to green hooks (`"green": true`); no green fringe was seen. Advice given to Evan:
+solid evenly lit green, stand a step in front, never wear green, mainly worth it for hooks.
 
 ## Environment requirements
 

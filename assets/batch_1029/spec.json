@@ -1,0 +1,112 @@
+{
+ "out": "jobs/b1029/out",
+ "work": "jobs/b1029/work",
+ "demo": "jobs/b1029/in/streamer_demo.mp4",
+ "outfits": {
+  "grey_nohat": {
+   "hooks": {
+    "watchthis": "jobs/b1029/in/outfits/grey_nohat/watchthis.MOV",
+    "cantbelieve": "jobs/b1029/in/outfits/grey_nohat/cantbelieve.MOV"
+   },
+   "intro": "jobs/b1029/in/outfits/grey_nohat/intro.MOV",
+   "pen": "jobs/b1029/in/outfits/grey_nohat/pentwirl.MOV",
+   "green": false
+  },
+  "grey_hat": {
+   "hooks": {
+    "watchthis": "jobs/b1029/in/outfits/grey_hat/watchthis.MOV",
+    "cantbelieve": "jobs/b1029/in/outfits/grey_hat/cantbelieve.MOV"
+   },
+   "intro": "jobs/b1029/in/outfits/grey_hat/intro.MOV",
+   "pen": "jobs/b1029/in/outfits/grey_hat/pentwirl.MOV",
+   "green": false
+  },
+  "blue_nohat": {
+   "hooks": {
+    "watchthis": "jobs/b1029/in/outfits/blue_nohat/watchthis.MOV",
+    "cantbelieve": "jobs/b1029/in/outfits/blue_nohat/cantbelieve.MOV"
+   },
+   "intro": "jobs/b1029/in/outfits/blue_nohat/intro.MOV",
+   "pen": "jobs/b1029/in/outfits/blue_nohat/pentwirl.MOV",
+   "green": true
+  },
+  "blue_hat": {
+   "hooks": {
+    "watchthis": "jobs/b1029/in/outfits/blue_hat/watchthis.MOV",
+    "cantbelieve": "jobs/b1029/in/outfits/blue_hat/cantbelieve.MOV"
+   },
+   "intro": "jobs/b1029/in/outfits/blue_hat/intro.MOV",
+   "pen": "jobs/b1029/in/outfits/blue_hat/pentwirl.MOV",
+   "green": true
+  }
+ },
+ "hook_refs": {
+  "watchthis": {
+   "face": [
+    641,
+    385,
+    1172
+   ],
+   "cover_width": true
+  },
+  "cantbelieve": "per_reaction"
+ },
+ "reactions": {
+  "spend_money_blur": {
+   "file": "jobs/b1029/in/react/spend_money_blur.mp4",
+   "text": "jobs/b1029/text/hook_ref1.png",
+   "pen_face": [
+    131,
+    235,
+    1445
+   ],
+   "cantbelieve_face": [
+    486,
+    296,
+    1251
+   ]
+  },
+  "spend_money_1word": {
+   "file": "jobs/b1029/in/react/spend_money_1word.mp4",
+   "text": "jobs/b1029/text/hook_ref1.png",
+   "pen_face": [
+    131,
+    235,
+    1445
+   ],
+   "cantbelieve_face": [
+    486,
+    296,
+    1251
+   ]
+  },
+  "millionaire_vs_haters": {
+   "file": "jobs/b1029/in/react/millionaire_vs_haters.mp4",
+   "text": "jobs/b1029/text/hook_ref2.png",
+   "pen_face": [
+    140,
+    828,
+    1462
+   ],
+   "cantbelieve_face": [
+    470,
+    742,
+    1256
+   ]
+  },
+  "millionaire_vs_haters_flipped": {
+   "file": "jobs/b1029/in/react/millionaire_vs_haters_flipped.mp4",
+   "text": "jobs/b1029/text/hook_ref2.png",
+   "pen_face": [
+    140,
+    828,
+    1462
+   ],
+   "cantbelieve_face": [
+    470,
+    742,
+    1256
+   ]
+  }
+ }
+}

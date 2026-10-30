@@ -133,12 +133,17 @@ Matching rules Evan gave:
   least full width (`cover_width`) so the clip's side edges never cut through the shirt. That comes out ~10%
   bigger than the reference face, which Evan's reference framing implies.
 - **Text hook** on BOTH hook types, for the hook and the whole reaction: the reference text exactly
-  ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). TikTok Sans weight 700,
-  4px black outline, box 84,478 to 802,554. The emojis are the real Apple ones lifted from the reference
+  ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). TikTok Sans **weight 650,
+  width 90** (slightly condensed: the reference letters are taller than TikTok Sans at width 100; Evan
+  noticed when it was 700/100), 4px black outline, box 84,478 to 802,554. The emojis are the real Apple ones lifted from the reference
   (`assets/batch_1029/emoji_*_1080.png`; text PNGs and spec.json saved there too, extracted as pixels that stay static while the video changes, then
   cleaned by colour).
 - **Pen twirl:** placed by face match (ref 1 face 131px at 235,1445; ref 2 face 140px at 828,1462).
 - The green flash at the end of the reaction clips is part of the source edit, and the reference keeps it.
+- **Ending (Evan, 2026-10-30):** the reaction clips end in a long black tail (2-4s). Cut it like the reference:
+  the "snap" is the cut to black (a click in the audio at the same moment, found with blackdetect). Keep
+  only a short black beat after it (ref 1: 0.93s, ref 2: 0.70s; `black_beat` in the spec), and stop the
+  text hook and pen twirl at the snap (the reference's black beat is fully black), then the intro.
 
 First batch: 32 videos in 20 min (4 outfits prepared in ~8 min, then ~22s per video).
 Run: `python3 scripts/make_ref_reaction.py jobs/b1029/spec.json` (the spec lists outfits, refs and reaction

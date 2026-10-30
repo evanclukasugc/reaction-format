@@ -64,7 +64,8 @@
     486,
     296,
     1251
-   ]
+   ],
+   "black_beat": 0.93
   },
   "spend_money_1word": {
    "file": "jobs/b1029/in/react/spend_money_1word.mp4",
@@ -78,7 +79,8 @@
     486,
     296,
     1251
-   ]
+   ],
+   "black_beat": 0.93
   },
   "millionaire_vs_haters": {
    "file": "jobs/b1029/in/react/millionaire_vs_haters.mp4",
@@ -92,7 +94,8 @@
     470,
     742,
     1256
-   ]
+   ],
+   "black_beat": 0.7
   },
   "millionaire_vs_haters_flipped": {
    "file": "jobs/b1029/in/react/millionaire_vs_haters_flipped.mp4",
@@ -106,7 +109,8 @@
     470,
     742,
     1256
-   ]
+   ],
+   "black_beat": 0.7
   }
  }
 }

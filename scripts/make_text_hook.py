@@ -20,12 +20,13 @@ ap.add_argument("--box", type=int, nargs=4, required=True)
 ap.add_argument("--emoji", nargs=3, action="append", default=[])
 ap.add_argument("--weight", type=int, default=620)
 ap.add_argument("--stroke", type=int, default=3)
+ap.add_argument("--width", type=int, default=100, help="font width axis (75-150)")
 a = ap.parse_args()
 
 axes = TTFont(FONT)["fvar"].axes
 def font(size):
     f = ImageFont.truetype(FONT, size)
-    f.set_variation_by_axes([a.weight if x.axisTag == "wght" else x.defaultValue for x in axes])
+    f.set_variation_by_axes([{"wght": a.weight, "wdth": a.width}.get(x.axisTag, x.defaultValue) for x in axes])
     return f
 
 x0, y0, x1, y1 = a.box

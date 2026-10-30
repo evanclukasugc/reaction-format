@@ -19,7 +19,7 @@ SPEC: {
 }
 Face boxes are on the 1080x1920 canvas: [face width, face centre x, face centre y].
 """
-import json, os, subprocess, sys, time
+import json, os, re, subprocess, sys, time
 import cv2, numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -70,9 +70,26 @@ def matte(src, dst, model, width, seconds=None):
         run(cmd, stdout=subprocess.DEVNULL)
 
 
-def render_head(hook, hook_a, hook_pl, green, reaction, pen, pen_a, pen_pl, text_png, out):
+def find_snap(reaction):
+    """Where the reaction cuts to its trailing black (the 'snap'); None if it doesn't end on black."""
+    log = run(["ffmpeg", "-v", "info", "-i", reaction, "-vf", "blackdetect=d=0.3:pix_th=0.08:pic_th=0.98",
+               "-an", "-f", "null", "-"], capture_output=True, text=True).stderr
+    starts = [float(x) for x in re.findall(r"black_start:([\d.]+)", log)]
+    ends = [float(x) for x in re.findall(r"black_end:([\d.]+)", log)]
+    d = duration(reaction)
+    if starts and ends and ends[-1] > d - 0.2 and starts[-1] > d * 0.5:
+        return starts[-1]
+    return None
+
+
+def render_head(hook, hook_a, hook_pl, green, reaction, pen, pen_a, pen_pl, text_png, out, snap=None, beat=0.8):
+    """snap: the reaction's cut to black. The reaction is kept for `beat` seconds of black after it (like the
+    reference), and the pen twirl and text hook stop at the snap."""
     hook_d, react_d, pen_d = duration(hook), duration(reaction), duration(pen)
-    loop = ["-stream_loop", "-1"] if pen_d < react_d else []
+    overlay_d = react_d
+    if snap is not None:
+        overlay_d, react_d = snap, min(react_d, snap + beat)
+    loop = ["-stream_loop", "-1"] if pen_d < overlay_d else []
     hs, hx, hy = hook_pl
     ps, px, py = pen_pl
     hw, pw = round(W * hs / 2) * 2, round(W * ps / 2) * 2
@@ -86,9 +103,9 @@ def render_head(hook, hook_a, hook_pl, green, reaction, pen, pen_a, pen_pl, text
         f"[bg][hk]overlay=x={hx}:y={hy}:eof_action=pass[v1]",
         f"[3:v]fps={FPS},setpts=N/{FPS}/TB,scale={pw}:-2,format=rgba[ps];"
         f"[4:v]setpts=N/{FPS}/TB,scale={pw}:-2,{EDGE}[pa];"
-        f"[ps][pa]alphamerge,trim=0:{react_d},setpts=PTS-STARTPTS+{hook_d}/TB[pn]",
+        f"[ps][pa]alphamerge,trim=0:{overlay_d},setpts=PTS-STARTPTS+{hook_d}/TB[pn]",
         f"[v1][pn]overlay=x={px}:y={py}:eof_action=pass[v2]",
-        f"[v2][5:v]overlay=0:0:shortest=1,trim=0:{total},format=yuv420p[v]",
+        f"[v2][5:v]overlay=0:0:shortest=1:enable='lt(t,{hook_d + overlay_d:.3f})',trim=0:{total},format=yuv420p[v]",
         f"[1:a]{AUDIO},apad,atrim=0:{hook_d}[a0];[0:a]{AUDIO},atrim=0:{react_d},asetpts=PTS-STARTPTS[a1]",
         "[a0][a1]concat=n=2:v=0:a=1[a]",
     ])
@@ -105,6 +122,10 @@ def main():
     longest = max(duration(r["file"]) for r in reactions.values())
     t0 = time.time()
 
+    snaps = {n: find_snap(r["file"]) for n, r in reactions.items()}
+    for n, t in snaps.items():
+        print(f"  {n}: snap at {t}s, keeping {reactions[n].get('black_beat', 0.8)}s of black" if t else
+              f"  {n}: no trailing black, kept in full", flush=True)
     prepared = {}
     for oname, o in spec["outfits"].items():
         p = {"hooks": {}}
@@ -134,7 +155,7 @@ def main():
                 name = f"{rname}__{oname}__{hname}"
                 head = os.path.join(work, name + "_head.mp4")
                 render_head(hfile, hook_a, hook_pl, green, r["file"], spec["outfits"][oname]["pen"],
-                            p["pen_a"], pen_pl, r["text"], head)
+                            p["pen_a"], pen_pl, r["text"], head, snaps[rname], r.get("black_beat", 0.8))
                 final = os.path.join(out, name + ".mp4")
                 join([head, p["tail"]], final, work)
                 print(f"  done {name}.mp4 ({duration(final):.1f}s) hook {hook_pl[0]:.2f}x@{hook_pl[1:]}, "

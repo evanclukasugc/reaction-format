@@ -158,14 +158,19 @@ solid evenly lit green, stand a step in front, never wear green, mainly worth it
 
 ## Fonts
 
+**When Evan asks for "the classic TikTok font", "CapCut Classic" or "the TikTok font", use CapCut Classic:**
+`fonts/TikTokDisplay-Medium.ttf`, white fill, black outline (`make_text_hook.py --font fonts/TikTokDisplay-Medium.ttf
+--stroke 5` at ~89px; scale the outline with the font size, ~5.5% of it), no bold, no shadow. The emoji PNGs in
+`assets/batch_1029/` go after the text when the text has emojis.
+
 - `fonts/TikTokDisplay-Medium.ttf`: **CapCut's "Classic" / TikTok font**, pulled from Evan's CapCut desktop install
   (2026-10-30). CapCut's own "Classic" preset (read from Evan's draft by a local session): this font, fill
   #ffffff, outline #000000 at CapCut width 0.08, no shadow, no bold/italic. In `make_text_hook.py` that's
   `--font fonts/TikTokDisplay-Medium.ttf --stroke 5` at ~89px (CapCut's 0.08 isn't the same unit: 7px looked
   thicker than the reference, 5px matched). Don't add `--embolden`.
 - `fonts/TikTokSans.ttf`: free variable TikTok Sans (Google Fonts). Same family look, but not identical. The
-  original reaction format's CTA text still uses it (approved by Evan before the real font was available);
-  ask before switching that one.
+  original reaction format's CTA text ("Comment "Studio" for the full guide") keeps using it. Evan decided on
+  2026-10-30 not to switch that format to TikTok Display.
 - Getting fonts off Evan's Mac: this cloud session can't see his Mac. A local Claude session (desktop app,
   "on your Mac") can find the file, and Evan can upload it straight into this chat.
 

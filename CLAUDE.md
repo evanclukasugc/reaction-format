@@ -133,9 +133,10 @@ Matching rules Evan gave:
   least full width (`cover_width`) so the clip's side edges never cut through the shirt. That comes out ~10%
   bigger than the reference face, which Evan's reference framing implies.
 - **Text hook** on BOTH hook types, for the hook and the whole reaction: the reference text exactly
-  ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). TikTok Sans **weight 650,
-  width 90** (slightly condensed: the reference letters are taller than TikTok Sans at width 100; Evan
-  noticed when it was 700/100), 4px black outline, box 84,478 to 802,554. The emojis are the real Apple ones lifted from the reference
+  ("He's living in 3026 😭😭" for ref 1, "He's living in 3026 😭🤯" for ref 2). Font: **TikTok Display Medium**
+  (`fonts/TikTokDisplay-Medium.ttf`, the real font from Evan's CapCut, = CapCut "Classic") with a 1px faux bold
+  (`--embolden 1`) and a 3px black outline, box 84,478 to 802,554. This matches the reference exactly. Earlier
+  TikTok Sans approximations (700/100, then 650/90 condensed) were close but Evan could tell. The emojis are the real Apple ones lifted from the reference
   (`assets/batch_1029/emoji_*_1080.png`; text PNGs and spec.json saved there too, extracted as pixels that stay static while the video changes, then
   cleaned by colour).
 - **Pen twirl:** placed by face match (ref 1 face 131px at 235,1445; ref 2 face 140px at 828,1462).
@@ -154,6 +155,17 @@ ship it). Test on one outfit first and compare frames side by side with the refe
 **Green screen:** Evan filmed the blue-shirt hooks on a (checkered) green backdrop. RVM handles it fine, and
 `despill=type=green` is applied to green hooks (`"green": true`); no green fringe was seen. Advice given to Evan:
 solid evenly lit green, stand a step in front, never wear green, mainly worth it for hooks.
+
+## Fonts
+
+- `fonts/TikTokDisplay-Medium.ttf`: **CapCut's "Classic" / TikTok font**, pulled from Evan's CapCut desktop install
+  (2026-10-30). Use it for TikTok-style text (`make_text_hook.py --font fonts/TikTokDisplay-Medium.ttf --embolden 1`).
+  Only Medium exists in the file; CapCut text looks one step bolder, so add the 1px embolden.
+- `fonts/TikTokSans.ttf`: free variable TikTok Sans (Google Fonts). Same family look, but not identical. The
+  original reaction format's CTA text still uses it (approved by Evan before the real font was available);
+  ask before switching that one.
+- Getting fonts off Evan's Mac: this cloud session can't see his Mac. A local Claude session (desktop app,
+  "on your Mac") can find the file, and Evan can upload it straight into this chat.
 
 ## Environment requirements
 

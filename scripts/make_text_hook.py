@@ -21,12 +21,16 @@ ap.add_argument("--emoji", nargs=3, action="append", default=[])
 ap.add_argument("--weight", type=int, default=620)
 ap.add_argument("--stroke", type=int, default=3)
 ap.add_argument("--width", type=int, default=100, help="font width axis (75-150)")
+ap.add_argument("--embolden", type=int, default=0, help="thicken the letters by N px (faux bold)")
+ap.add_argument("--font", default=FONT, help="font file; weight/width only apply to variable fonts")
 a = ap.parse_args()
 
-axes = TTFont(FONT)["fvar"].axes
+tt = TTFont(a.font)
+axes = tt["fvar"].axes if "fvar" in tt else None
 def font(size):
-    f = ImageFont.truetype(FONT, size)
-    f.set_variation_by_axes([{"wght": a.weight, "wdth": a.width}.get(x.axisTag, x.defaultValue) for x in axes])
+    f = ImageFont.truetype(a.font, size)
+    if axes:
+        f.set_variation_by_axes([{"wght": a.weight, "wdth": a.width}.get(x.axisTag, x.defaultValue) for x in axes])
     return f
 
 x0, y0, x1, y1 = a.box
@@ -34,13 +38,17 @@ img = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
 size = 100
 for _ in range(3):   # converge on the size whose outlined width matches the box
-    b = d.textbbox((0, 0), a.text, font=font(size), stroke_width=a.stroke)
+    b = d.textbbox((0, 0), a.text, font=font(size), stroke_width=a.stroke + a.embolden)
     size = round(size * (x1 - x0) / (b[2] - b[0]))
 f = font(size)
-b = d.textbbox((0, 0), a.text, font=f, stroke_width=a.stroke)
+b = d.textbbox((0, 0), a.text, font=f, stroke_width=a.stroke + a.embolden)
 x = x0 - b[0]
 y = (y0 + y1) / 2 - (b[1] + b[3]) / 2
-d.text((x, y), a.text, font=f, fill="white", stroke_width=a.stroke, stroke_fill="black")
+# faux bold: the black outline goes around the thickened letters, then the letters are drawn with a
+# white "stroke" that fattens them by `embolden` px
+d.text((x, y), a.text, font=f, fill="white", stroke_width=a.stroke + a.embolden, stroke_fill="black")
+if a.embolden:
+    d.text((x, y), a.text, font=f, fill="white", stroke_width=a.embolden, stroke_fill="white")
 for path, ex, ey in a.emoji:
     e = Image.open(path).convert("RGBA")
     img.alpha_composite(e, (int(ex), int(ey)))
